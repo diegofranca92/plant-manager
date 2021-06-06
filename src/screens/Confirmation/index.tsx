@@ -3,8 +3,13 @@ import { SafeAreaView, View, Text, StyleSheet, TextInput, KeyboardAvoidingView, 
 import colors from "../../theme/colors";
 import fonts from "../../theme/fonts";
 import {Button} from "../../components/Button";
+import { useNavigation } from '@react-navigation/core';
+
 
 export function Confirmation() {
+    const navigation = useNavigation()
+
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
@@ -12,7 +17,11 @@ export function Confirmation() {
                 <Text style={styles.title}>Prontinho</Text>
                 <Text style={styles.subtitle}> Agora vamos começar a cuidar das suas plantinhas com muito cuidado.</Text>                
                 <View style={{width: '100%', paddingHorizontal: 70}}>
-                    <Button title="Começar"></Button>
+                    <Button title="Começar" 
+                        onPress={() => (
+                        navigation.navigate("PlantSelect")
+                        )} 
+                    />
                 </View>
             </View>
         </SafeAreaView>

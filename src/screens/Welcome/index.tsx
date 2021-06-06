@@ -17,20 +17,20 @@ export function Welcome(){
     return (
         <SafeAreaView style={{flex: 1}}>
           <View style={styles.container}>
-          <Text style={styles.title}>Gerencie { '\n'} suas plantas de{ '\n'} forma fácil</Text>
-          { show &&
-            <Image style={styles.image} source={wateringImg} resizeMode="contain"/>
-          }
-          <Text style={styles.subtitle}>Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você
-            sempre que precisar.
-          </Text>
-          <TouchableOpacity style={styles.button} onPress={() => (
-            navigation.navigate("UserIdentification")
-          )}>
-            <Text>
-            <Feather name="chevron-right" color="white" style={{fontSize: 28}} />
+            <Text style={styles.title}>Gerencie { '\n'} suas plantas de{ '\n'} forma fácil</Text>
+            { show &&
+              <Image style={styles.image} source={wateringImg} resizeMode="contain"/>
+            }
+            <Text style={styles.subtitle}>Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você
+              sempre que precisar.
             </Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => (
+              navigation.navigate("UserIdentification")
+            )}>
+              <Text>
+              <Feather name="chevron-right" color="white" style={{fontSize: 28}} />
+              </Text>
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
     )
