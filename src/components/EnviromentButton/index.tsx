@@ -5,7 +5,7 @@ import colors from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 interface EnviromentButtonProps extends RectButtonProps {
-    title?: string | JSX.Element;
+    title?: string;
     active?: boolean;
 }
 
