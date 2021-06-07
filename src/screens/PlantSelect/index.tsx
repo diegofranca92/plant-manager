@@ -10,6 +10,8 @@ import { CardPlantPrimary } from './../../components/CardPlantPrimary';
 import api from './../../services/api';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { Load } from './../../components/Load';
+
 interface EnvProps {
     key: string;
     title: string;
@@ -33,7 +35,24 @@ export function PlantSelect(){
 
     const [envPlant, setEnvPlant] = useState<EnvProps[]>([]);
     const [plants, setPlants] = useState<PlantProps[]>([]);
+    const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
+    const [envPlantSelected, setEnvPlantSelected] = useState('all');
   
+    const [loading, setLoading] = useState(true);
+
+    function handleEnvPlantSelected( plantENV:string ) {
+        setEnvPlantSelected(plantENV)
+
+        if (plantENV == 'all') 
+            return setFilteredPlants(plants)
+        
+        const filtered = plants.filter(plant => 
+            plant.environments.includes(plantENV)
+        )
+
+        setFilteredPlants(filtered)
+    }
+
     useEffect(() => {
         async function getEnviroment() {
             const { data } = await api.get('plants_environments?_sort=title&_order=asc')
@@ -49,15 +68,19 @@ export function PlantSelect(){
 
     useEffect(() => {
         async function getPlants() {
-            const { data } = await api.get('plants')
+            const { data } = await api.get('plants?_sort=name&_order=asc')
             setPlants(data)
-            console.log(plants);
-            
+            setFilteredPlants(data)
+            setLoading(false)
+           
         }
 
         getPlants();
     }, [])
 
+    if (loading) 
+        return <Load />
+  
       return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -69,7 +92,11 @@ export function PlantSelect(){
                 <FlatList 
                     data={envPlant}
                     renderItem={({ item }) => (
-                        <EnviromentButton title={item.title} />
+                        <EnviromentButton 
+                        title={item.title} 
+                        active={item.key === envPlantSelected }
+                        onPress={() => handleEnvPlantSelected(item.key)}
+                        />
                     )}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -87,7 +114,7 @@ export function PlantSelect(){
             <ScrollView 
             contentContainerStyle={{justifyContent: 'center', paddingHorizontal: 32}}>
                 <FlatList 
-                    data={plants}
+                    data={filteredPlants}
                     renderItem={({ item }) => (
                         <CardPlantPrimary data={item} />
                     )}
