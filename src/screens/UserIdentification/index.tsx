@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
 import colors from "../../theme/colors";
 import fonts from "../../theme/fonts";
 import {Button} from "../../components/Button";
 import { useNavigation } from "@react-navigation/core";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function UserIdentification() {
     const navigation = useNavigation()
@@ -28,6 +29,15 @@ export function UserIdentification() {
         setName(value)
     }
 
+    async function handleSubmit() {
+        if(!name)
+            return Alert.alert("Me diz como te chamar 😢")
+
+        await AsyncStorage.setItem("@plantmanager:user", name)
+
+        navigation.navigate("Confirmation")
+    }
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -49,9 +59,7 @@ export function UserIdentification() {
                             />
                             <View style={{width: '100%', paddingHorizontal: 70}}>
                                 <Button title="Confirmar" 
-                                    onPress={() => (
-                                        navigation.navigate("Confirmation")
-                                    )} 
+                                    onPress={handleSubmit} 
                                 />
                             </View>
                         </View>
