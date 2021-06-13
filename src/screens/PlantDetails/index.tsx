@@ -7,23 +7,13 @@ import {Button} from "../../components/Button";
 import {SvgFromUri} from 'react-native-svg'
 import gotaImg from "../../assets/waterdrop.png";
 import { getBottomSpace } from 'react-native-iphone-x-helper';
-import { useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
 import { format, isBefore } from 'date-fns';
+import { loadPlant, PlantProps, savePlant } from '../../libs/storage';
 
 interface Params {
-    plant: {
-        id:number;
-        name: string;
-        about: string;
-        water_tips: string;
-        photo: string;
-        environments: [string];
-        frequency: {
-        times: number;
-        repeat_every: string;
-    }
-    }
+    plant: PlantProps
 }
 
 export function PlantDetails() {
@@ -33,6 +23,8 @@ export function PlantDetails() {
 
     const route = useRoute();
     const { plant } = route.params as Params;
+
+    const navigation = useNavigation()
     
     // o sinal _ serve pra omitir / dizer que não ira usar a variavel ou qualquer outra coisa
     function handleChangeTime(_:Event, dateTime: Date | undefined) {
@@ -48,6 +40,31 @@ export function PlantDetails() {
 
         if(dateTime)
             setSelectedDateTime(dateTime)
+    }
+
+    async function handleSavePlant() {
+
+        // const data = await loadPlant();
+        // console.log(data);
+        
+
+        try {
+            await savePlant({
+                ...plant,
+                dateTimeNotification: selectedDateTime
+            })
+
+            navigation.navigate("Confirmation", {
+                title: 'Tudo certo',
+                subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com bastante amor.',
+                buttonTitle: 'Muito Obrigado :D',
+                icon: 'hug',
+                nextScreen: 'MyPlants'
+            })
+
+        } catch {
+            Alert.alert("Não foi possivel salvar essa planta 😢")
+        }
     }
 
     return (
@@ -154,7 +171,7 @@ export function PlantDetails() {
                         </TouchableOpacity>
                     )
                 }
-                <Button title="Cadastrar Planta" />
+                <Button title="Cadastrar Planta" onPress={handleSavePlant} />
             </View>
 
             

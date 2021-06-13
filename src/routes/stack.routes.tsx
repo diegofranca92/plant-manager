@@ -6,6 +6,7 @@ import { UserIdentification } from './../screens/UserIdentification';
 import { Confirmation } from './../screens/Confirmation';
 import { PlantSelect } from "./../screens/PlantSelect";
 import { PlantDetails } from "./../screens/PlantDetails";
+import { MyPlants } from "./../screens/MyPlants";
 
 const stackRoutes = createStackNavigator();
 
@@ -41,6 +42,11 @@ const AppRoutes: React.FC = () => (
         <stackRoutes.Screen 
             name="PlantDetails"
             component={PlantDetails}
+        />
+
+        <stackRoutes.Screen 
+            name="MyPlants"
+            component={MyPlants}
         />
     </stackRoutes.Navigator>
 )

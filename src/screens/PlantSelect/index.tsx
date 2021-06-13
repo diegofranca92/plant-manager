@@ -11,23 +11,11 @@ import api from './../../services/api';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Load } from './../../components/Load';
+import { PlantProps } from '@app/libs/storage';
 
 interface EnvProps {
     key: string;
     title: string;
-}
-
-interface PlantProps {
-    id:number;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: [string];
-    frequency: {
-        times: number;
-        repeat_every: string;
-    }
 }
 
 export function PlantSelect(){
