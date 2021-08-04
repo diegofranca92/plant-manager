@@ -121,7 +121,7 @@ export function PlantSelect(){
                         justifyContent: 'center',
                         paddingBottom: 5,
                         marginLeft: 32,
-                        marginVertical: 32,
+                        marginVertical: 20,
                         paddingRight: 32
                     }}
                 />
@@ -152,7 +152,7 @@ export function PlantSelect(){
   const styles = StyleSheet.create({
     container: {
         width: '100%',
-        justifyContent: 'space-around'
+        justifyContent: 'space-evenly'
     },
     header: {
         paddingHorizontal: 30
