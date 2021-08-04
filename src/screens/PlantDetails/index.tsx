@@ -68,41 +68,40 @@ export function PlantDetails() {
     }
 
     return (
-        <>
-            <ScrollView contentContainerStyle={{flex: 1, justifyContent: 'space-between', backgroundColor: colors.shape}}>
-                <View style={{
-                    flex: 1, 
-                    paddingHorizontal: 30,
-                    paddingVertical: 50,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: colors.shape
+        <ScrollView contentContainerStyle={{flex: 1}} showsVerticalScrollIndicator={false}>
+            <View style={{
+                flex: 1, 
+                paddingHorizontal: 30,
+                paddingVertical: 50,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: colors.shape
+            }}>
+                <SvgFromUri 
+                    uri={plant.photo}
+                    width={150} 
+                    height={150} 
+                />
+                <Text style={{
+                    fontFamily: fonts.heading,
+                    fontSize: 21,
+                    color: colors.heading,
+                    marginTop: 15
+                }}
+                >
+                    {plant.name}
+                </Text>
+                <Text style={{
+                    textAlign: 'center',
+                    fontFamily: fonts.text,
+                    fontSize: 17,
+                    color: colors.heading,
+                    marginTop: 10
                 }}>
-                    <SvgFromUri 
-                        uri={plant.photo}
-                        width={150} 
-                        height={150} 
-                    />
-                    <Text style={{
-                        fontFamily: fonts.heading,
-                        fontSize: 21,
-                        color: colors.heading,
-                        marginTop: 15
-                    }}
-                    >
-                        {plant.name}
-                    </Text>
-                    <Text style={{
-                        textAlign: 'center',
-                        fontFamily: fonts.text,
-                        fontSize: 17,
-                        color: colors.heading,
-                        marginTop: 10
-                    }}>
-                        {plant.about}
-                    </Text>
-                </View>
-            </ScrollView>
+                    {plant.about}
+                </Text>
+            </View>
+        
             <View style={{
                 backgroundColor: colors.white,
                 paddingHorizontal: 20,
@@ -173,8 +172,6 @@ export function PlantDetails() {
                 }
                 <Button title="Cadastrar Planta" onPress={handleSavePlant} />
             </View>
-
-            
-        </>
+        </ScrollView>
     )
 }
