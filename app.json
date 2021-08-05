@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "plant-manager",
+    "name": "Plant Manager",
     "slug": "plant-manager",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.diego.plantmanager"
     },
     "web": {
       "favicon": "./assets/favicon.png"
